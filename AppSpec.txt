@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: target/shipwreck-app-1.0-SNAPSHOT.jar
+    destination: /opt/shipwreck
+hooks:
+  BeforeInstall:
+    - location: /opt/shipwreck/scripts/cleanup_script.sh
+  ApplicationStart:
+    - location: /opt/shipwreck/scripts/run_build.sh
+      timeout: 3600
+  ValidateService:
+    - location: /opt/shipwreck/scripts/validate_monitor_service.sh
+      timeout: 3600
